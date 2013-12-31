@@ -1,6 +1,8 @@
 starfall
 ========
 
+##[Play](http://chrzhang.github.io/starfall/)
+
 A clone of the game Space Shooters in Unity3d with the official tutorials and a little customization.
 Currently still in development.
 
