@@ -18,11 +18,15 @@ public class DestroyByContact : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Boundary")
 			return;
+		if (other.tag == "Asteroid"){
+			return; // Do not let asteroid-asteroid collisions occur
+		}
 		Instantiate(explosion, transform.position, transform.rotation);
 		if (other.tag == "Player") {
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
+	
 		gameController.AddScore(scoreValue);
 		Destroy(other.gameObject); // Remove bolt
 		Destroy(gameObject); // Blow up asteroid
