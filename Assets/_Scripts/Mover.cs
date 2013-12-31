@@ -5,6 +5,6 @@ public class Mover : MonoBehaviour {
 
 	public float speed;
 	void Start() {
-		rigidbody.velocity  = transform.up * speed;
+		rigidbody.velocity  = transform.forward * speed;
 	}
 }
