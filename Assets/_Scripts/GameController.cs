@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour {
 		while(true) {
 			for (int i = 0; i < (int)(hazardCount * 0.3); ++i) {	
 				for (int j = 0; j < difficulty; ++j) {
+					// Randomly pick and scale the asteroid
 					GameObject hazard = hazards [Random.Range (0, hazards.Length)];
 					randomno = Random.Range (0.2f, 1.3f);
 					scale.x = randomno;
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour {
 					randomno = Random.Range (0.2f, 1.3f);
 					scale.z = randomno;
 					hazard.transform.localScale = scale;
+					// Randomly choose where to spawn it
 					Vector3 spawnPosition = new Vector3(Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 					Quaternion spawnRotation = Quaternion.identity;
 					Instantiate(hazard, spawnPosition, spawnRotation);
@@ -68,7 +70,10 @@ public class GameController : MonoBehaviour {
 				restart = true;
 				break;
 			}
-			++difficulty; // Increase with each round
+			if (difficulty < 3)
+				++difficulty; // Increase with each round until 3, then reset
+			else
+				difficulty = 1;
 		}
 	}
 

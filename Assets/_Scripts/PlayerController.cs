@@ -8,6 +8,8 @@ public class Boundary {
 
 public class PlayerController : MonoBehaviour {
 
+	public AudioClip friedSound;
+
 	public float speed;
 	public float tilt;
 	public Boundary boundary;
@@ -15,9 +17,13 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
-	
+
 	private float nextFire;
+
+	public float maxHeat;
 	private bool overheated;
+	private int heat;
+	private int overheatingTimer = 200;
 
 	void Start() {
 		overheated = false;
@@ -27,7 +33,27 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButton ("Fire1") && Time.time > nextFire && !overheated) {
 			nextFire = Time.time + fireRate; 
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			//missileSound.Play ();
 			audio.Play ();
+			heat += 150; // Guns burnin' up!
+			if (heat > maxHeat) {
+				AudioSource.PlayClipAtPoint(friedSound, Camera.main.transform.position);
+				overheated = true; // Oops, got carried away, guns fried
+			}
+		}
+		// If the user was NOT able to fire, cool down the guns
+		heat-=10;
+		if (heat < 0)
+			heat = 0;
+		Debug.Log (heat);
+		if (overheated) {
+			Debug.Log ("Overheated!");
+			--overheatingTimer;
+			if (overheatingTimer < 1) {
+				heat = 0;
+				overheated = false;
+				overheatingTimer = 600;
+			}
 		}
 	}
 
