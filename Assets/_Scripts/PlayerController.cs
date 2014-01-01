@@ -15,12 +15,16 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
-
-
-	private float nextFire;
 	
+	private float nextFire;
+	private bool overheated;
+
+	void Start() {
+		overheated = false;
+	}
+
 	void Update() {
-		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
+		if (Input.GetButton ("Fire1") && Time.time > nextFire && !overheated) {
 			nextFire = Time.time + fireRate; 
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 			audio.Play ();

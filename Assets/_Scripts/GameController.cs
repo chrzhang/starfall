@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject hazard;
+	public GameObject[] hazards;
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public float spawnWait;
@@ -41,10 +41,20 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator SpawnWaves() {
+		float randomno;
+		Vector3 scale;
 		yield return new WaitForSeconds(startWait);
 		while(true) {
-			for (int i = 0; i < hazardCount; ++i) {	
+			for (int i = 0; i < (int)(hazardCount * 0.3); ++i) {	
 				for (int j = 0; j < difficulty; ++j) {
+					GameObject hazard = hazards [Random.Range (0, hazards.Length)];
+					randomno = Random.Range (0.2f, 1.3f);
+					scale.x = randomno;
+					randomno = Random.Range (0.2f, 1.3f);
+					scale.y = randomno;
+					randomno = Random.Range (0.2f, 1.3f);
+					scale.z = randomno;
+					hazard.transform.localScale = scale;
 					Vector3 spawnPosition = new Vector3(Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 					Quaternion spawnRotation = Quaternion.identity;
 					Instantiate(hazard, spawnPosition, spawnRotation);
