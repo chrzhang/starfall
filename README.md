@@ -11,7 +11,7 @@ Currently still in development.
 1. Randomized scale, tumble (angular velocity), and speed.
 2. Asteroids will not "collide" with asteroids, avoiding confusing FX effects.
 
-FUTURE
+####Future
 1. Manually activate shields (which will be depleted from a regenerating source).
 2. Blink (flash out of material existence to dodge incoming collisions).
 3. Activate additional engines (increase speed temporarily).
